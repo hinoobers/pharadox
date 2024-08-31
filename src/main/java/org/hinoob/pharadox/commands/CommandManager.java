@@ -4,7 +4,8 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import org.hinoob.pharadox.PharadoxBot;
-import org.hinoob.pharadox.commands.impl.MemeCommand;
+import org.hinoob.pharadox.commands.impl.slash.EightBallCommand;
+import org.hinoob.pharadox.commands.impl.slash.MemeCommand;
 import org.hinoob.pharadox.commands.impl.minecraft.MCServerLookupCommand;
 import org.hinoob.pharadox.commands.impl.minecraft.MCUserLookupCommand;
 import org.hinoob.pharadox.commands.impl.moderation.SetPrefixCommand;
@@ -24,6 +25,7 @@ public class CommandManager {
         commands.add(new MCUserLookupCommand());
         commands.add(new MCServerLookupCommand());
         commands.add(new MemeCommand());
+        commands.add(new EightBallCommand());
 
         CommandListUpdateAction update = PharadoxBot.getInstance().getJda().updateCommands();
         for(Command command : commands) {
