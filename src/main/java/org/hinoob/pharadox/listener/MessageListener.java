@@ -6,10 +6,14 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.hinoob.pharadox.PharadoxBot;
 import org.hinoob.pharadox.datastore.Datastore;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 public class MessageListener extends ListenerAdapter {
+
+    // https://en.wiktionary.org/wiki/Category:English_swear_words
+    private final List<String> swearWords = List.of("arse", "ass", "bastard", "bitch", "bloody", "bollocks", "fuck", "bugger", "shit", "cock", "cunt", "nigga", "n1gga", "pussy", "kike", "dick", "d1ck", "crap");
 
     public MessageListener() {
 
@@ -24,7 +28,7 @@ public class MessageListener extends ListenerAdapter {
             for(String word : words) {
                 word = word.toLowerCase().trim();
 
-                if(word.contains("fuck") || word.contains("bitch")) { // i cba to make a actual swear filter
+                if(swearWords.stream().anyMatch(word::contains)) { // i cba to make a actual swear filter
                     event.getMessage().delete().queue(e -> {
                         event.getChannel().sendMessage("<@" + event.getMember().getId() + "> That message is not PROHIBITED!!!").queue(new Consumer<Message>() {
                             @Override
