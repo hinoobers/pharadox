@@ -10,23 +10,23 @@ import java.nio.ByteBuffer;
 public class AudioForwarder implements AudioSendHandler {
 
     private final AudioPlayer audioPlayer;
-    private final ByteBuffer buffer = ByteBuffer.allocate(1024);
-    private final MutableAudioFrame frame = new MutableAudioFrame();
+    private final ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+    private final MutableAudioFrame audioFrame = new MutableAudioFrame();
 
     public AudioForwarder(AudioPlayer audioPlayer) {
         this.audioPlayer = audioPlayer;
-        this.frame.setBuffer(buffer);
+        this.audioFrame.setBuffer(byteBuffer);
     }
 
     @Override
     public boolean canProvide() {
-        return audioPlayer.provide(frame);
+        return audioPlayer.provide(audioFrame);
     }
 
     @Nullable
     @Override
     public ByteBuffer provide20MsAudio() {
-        return buffer.flip();
+        return byteBuffer.flip();
     }
 
     @Override
