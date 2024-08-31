@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.hinoob.pharadox.commands.CommandManager;
 import org.hinoob.pharadox.datastore.Datastore;
 import org.hinoob.pharadox.datastore.DatastoreManager;
@@ -42,6 +43,7 @@ public class PharadoxBot {
         logger.info("Starting bot...");
         this.jda = JDABuilder.createDefault(token)
                 .addEventListeners(new MessageListener(), new CommandListener())
+                .enableCache(CacheFlag.VOICE_STATE)
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_VOICE_STATES)
                 .build();
         CustomStatuses.flip();

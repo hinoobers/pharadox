@@ -25,6 +25,7 @@ public class PlayerManager {
         YoutubeAudioSourceManager yt = new YoutubeAudioSourceManager(true);
         yt.setPlaylistPageCount(10);
         audioPlayerManager.registerSourceManager(yt);
+        AudioSourceManagers.registerLocalSource(audioPlayerManager);
     }
 
     public GuildMusicManager get(Guild guild) {
@@ -48,7 +49,14 @@ public class PlayerManager {
 
             @Override
             public void playlistLoaded(AudioPlaylist audioPlaylist) {
+                AudioTrack firstTrack = audioPlaylist.getSelectedTrack();
 
+                if(firstTrack == null) {
+                    firstTrack = audioPlaylist.getTracks().get(0);
+                }
+
+                System.out.println("Playlist loaded: " + firstTrack.getInfo().title);
+                musicManager.getScheduler().queue(firstTrack);
             }
 
             @Override
