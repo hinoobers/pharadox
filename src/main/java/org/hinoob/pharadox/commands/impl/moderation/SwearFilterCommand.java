@@ -1,4 +1,4 @@
-package org.hinoob.pharadox.commands.impl;
+package org.hinoob.pharadox.commands.impl.moderation;
 
 import com.google.gson.JsonElement;
 import net.dv8tion.jda.api.Permission;

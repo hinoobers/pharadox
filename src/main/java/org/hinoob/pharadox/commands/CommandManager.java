@@ -1,11 +1,10 @@
 package org.hinoob.pharadox.commands;
 
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.hinoob.pharadox.PharadoxBot;
-import org.hinoob.pharadox.commands.impl.SetPrefixCommand;
-import org.hinoob.pharadox.commands.impl.SwearFilterCommand;
+import org.hinoob.pharadox.commands.impl.moderation.SetPrefixCommand;
+import org.hinoob.pharadox.commands.impl.moderation.SwearFilterCommand;
 import org.hinoob.pharadox.datastore.Datastore;
 
 import java.util.ArrayList;

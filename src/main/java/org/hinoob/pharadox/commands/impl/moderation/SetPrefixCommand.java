@@ -1,4 +1,4 @@
-package org.hinoob.pharadox.commands.impl;
+package org.hinoob.pharadox.commands.impl.moderation;
 
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
