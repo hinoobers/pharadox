@@ -2,7 +2,9 @@ package org.hinoob.pharadox.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import org.hinoob.pharadox.PharadoxBot;
+import org.hinoob.pharadox.commands.impl.MemeCommand;
 import org.hinoob.pharadox.commands.impl.minecraft.MCServerLookupCommand;
 import org.hinoob.pharadox.commands.impl.minecraft.MCUserLookupCommand;
 import org.hinoob.pharadox.commands.impl.moderation.SetPrefixCommand;
@@ -21,6 +23,15 @@ public class CommandManager {
         commands.add(new SetPrefixCommand());
         commands.add(new MCUserLookupCommand());
         commands.add(new MCServerLookupCommand());
+        commands.add(new MemeCommand());
+
+        CommandListUpdateAction update = PharadoxBot.getInstance().getJda().updateCommands();
+        for(Command command : commands) {
+            if(command instanceof SlashCommand slashcmd) {
+                slashcmd.register(update);
+            }
+        }
+        update.queue();
     }
 
     public void handle(MessageReceivedEvent event) {
@@ -44,5 +55,13 @@ public class CommandManager {
     }
 
     public void handle(SlashCommandInteractionEvent event) {
+        for(Command command : commands) {
+            if(command instanceof SlashCommand slashcmd) {
+                if(event.getName().equals(slashcmd.getName())) {
+                    slashcmd.handle(event, PharadoxBot.getInstance().getDatastoreManager().get(event.getGuild().getIdLong()));
+                    break;
+                }
+            }
+        }
     }
 }

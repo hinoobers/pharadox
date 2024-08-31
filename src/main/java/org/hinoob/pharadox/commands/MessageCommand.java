@@ -1,16 +1,13 @@
 package org.hinoob.pharadox.commands;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import org.hinoob.pharadox.datastore.Datastore;
 
 public abstract class MessageCommand implements Command{
-
-    @Override
-    public void register() {
-
-    }
 
     public MessageEmbed error(String msg) {
         return new EmbedBuilder()

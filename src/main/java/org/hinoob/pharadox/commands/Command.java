@@ -1,8 +1,9 @@
 package org.hinoob.pharadox.commands;
 
-public interface Command {
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 
-    void register();
+public interface Command {
 
     String getName();
     String[] getAliases();
