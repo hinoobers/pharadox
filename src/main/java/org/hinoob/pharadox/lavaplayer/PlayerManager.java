@@ -8,6 +8,7 @@ import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import dev.lavalink.youtube.YoutubeAudioSourceManager;
 import net.dv8tion.jda.api.entities.Guild;
 
 import java.util.HashMap;
@@ -20,8 +21,10 @@ public class PlayerManager {
     private AudioPlayerManager audioPlayerManager = new DefaultAudioPlayerManager();
 
     private PlayerManager() {
-        AudioSourceManagers.registerRemoteSources(audioPlayerManager);
-        AudioSourceManagers.registerLocalSource(audioPlayerManager);
+
+        YoutubeAudioSourceManager yt = new YoutubeAudioSourceManager(true);
+        yt.setPlaylistPageCount(10);
+        audioPlayerManager.registerSourceManager(yt);
     }
 
     public GuildMusicManager get(Guild guild) {
@@ -35,6 +38,7 @@ public class PlayerManager {
 
     public void play(Guild guild, String trackUrl) {
         GuildMusicManager musicManager = get(guild);
+        System.out.println(trackUrl);
         audioPlayerManager.loadItemOrdered(musicManager, trackUrl, new AudioLoadResultHandler() {
             @Override
             public void trackLoaded(AudioTrack audioTrack) {

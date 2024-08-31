@@ -42,7 +42,7 @@ public class PharadoxBot {
         logger.info("Starting bot...");
         this.jda = JDABuilder.createDefault(token)
                 .addEventListeners(new MessageListener(), new CommandListener())
-                .enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MEMBERS)
+                .enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_VOICE_STATES)
                 .build();
         CustomStatuses.flip();
         this.datastoreManager.load();
