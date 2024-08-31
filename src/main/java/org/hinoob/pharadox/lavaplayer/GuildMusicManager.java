@@ -2,18 +2,25 @@ package org.hinoob.pharadox.lavaplayer;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
-import lombok.Getter;
+import net.dv8tion.jda.api.entities.Guild;
 
 public class GuildMusicManager {
 
-    @Getter private TrackScheduler scheduler;
-    @Getter private AudioForwarder forwarder;
+    private TrackScheduler trackScheduler;
+    private AudioForwarder audioForwarder;
 
-    public GuildMusicManager(AudioPlayerManager manager) {
-        AudioPlayer audioPlayer = manager.createPlayer();
-        scheduler = new TrackScheduler(audioPlayer);
-        audioPlayer.addListener(scheduler);
-        forwarder = new AudioForwarder(audioPlayer);
+    public GuildMusicManager(AudioPlayerManager manager, Guild guild) {
+        AudioPlayer player = manager.createPlayer();
+        trackScheduler = new TrackScheduler(player);
+        player.addListener(trackScheduler);
+        audioForwarder = new AudioForwarder(player, guild);
+    }
 
+    public TrackScheduler getTrackScheduler() {
+        return trackScheduler;
+    }
+
+    public AudioForwarder getAudioForwarder() {
+        return audioForwarder;
     }
 }

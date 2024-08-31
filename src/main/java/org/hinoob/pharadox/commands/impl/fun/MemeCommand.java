@@ -1,4 +1,4 @@
-package org.hinoob.pharadox.commands.impl.slash;
+package org.hinoob.pharadox.commands.impl.fun;
 
 import com.google.gson.JsonObject;
 import net.dv8tion.jda.api.JDA;

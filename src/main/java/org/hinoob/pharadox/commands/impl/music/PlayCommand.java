@@ -1,9 +1,13 @@
 package org.hinoob.pharadox.commands.impl.music;
 
+import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
+import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
+import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import org.hinoob.pharadox.PharadoxBot;
 import org.hinoob.pharadox.commands.MessageCommand;
-import org.hinoob.pharadox.commands.SlashCommand;
 import org.hinoob.pharadox.datastore.Datastore;
 import org.hinoob.pharadox.lavaplayer.PlayerManager;
 
@@ -43,7 +47,6 @@ public class PlayCommand extends MessageCommand {
             }
         }
 
-        PlayerManager playerManager = PlayerManager.get();
-        playerManager.play(event.getGuild(), args[0]);
+        PlayerManager.get().play(event.getGuild(), String.join(" ", args));
     }
 }

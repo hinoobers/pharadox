@@ -64,6 +64,13 @@ public class ChatbotCommand extends MessageCommand {
                     "I was created by hinoob.",
                     "I was created by hinoob. He's a cool guy.",
                     "I was created by hinoob. He's a good programmer."
+            ),
+
+            List.of("what", "is", "your", "favorite", "color"), List.of(
+                    "I'm a bot. I don't have a favorite color.",
+                    "I'm just code. I don't have a favorite color.",
+                    "I'm a bot. I don't have a favorite color like you do.",
+                    "It's #000000. It's the color of my soul."
             )
     );
     private final Random random = new Random();

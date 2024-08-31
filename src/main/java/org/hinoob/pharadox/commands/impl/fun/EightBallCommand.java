@@ -1,4 +1,4 @@
-package org.hinoob.pharadox.commands.impl.slash;
+package org.hinoob.pharadox.commands.impl.fun;
 
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;

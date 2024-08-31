@@ -4,15 +4,6 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import org.hinoob.pharadox.PharadoxBot;
-import org.hinoob.pharadox.commands.impl.*;
-import org.hinoob.pharadox.commands.impl.moderation.BanCommand;
-import org.hinoob.pharadox.commands.impl.music.PlayCommand;
-import org.hinoob.pharadox.commands.impl.slash.EightBallCommand;
-import org.hinoob.pharadox.commands.impl.slash.MemeCommand;
-import org.hinoob.pharadox.commands.impl.minecraft.MCServerLookupCommand;
-import org.hinoob.pharadox.commands.impl.minecraft.MCUserLookupCommand;
-import org.hinoob.pharadox.commands.impl.moderation.SetPrefixCommand;
-import org.hinoob.pharadox.commands.impl.moderation.SwearFilterCommand;
 import org.hinoob.pharadox.datastore.Datastore;
 import org.reflections.Reflections;
 
