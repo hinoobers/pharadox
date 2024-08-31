@@ -33,6 +33,7 @@ public class MojangAPI {
     }
 
     public static MojangAPIUser fetch(String username) {
+        System.out.println("Fetching user: " + username);
         try {
             URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + username);
             URLConnection connection = url.openConnection();
@@ -46,12 +47,17 @@ public class MojangAPI {
             String response = builder.toString();
             JsonObject object = new Gson().fromJson(response, JsonObject.class);
 
-            return fetch(object.get("id").getAsString());
+            return fetch(fixUUID(object.get("id").getAsString()));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return null;
+    }
+
+    public static UUID fixUUID(String uuid) {
+        // add dashes
+        return UUID.fromString(uuid.substring(0, 8) + "-" + uuid.substring(8, 12) + "-" + uuid.substring(12, 16) + "-" + uuid.substring(16, 20) + "-" + uuid.substring(20));
     }
 
     public static class MojangAPIUser {

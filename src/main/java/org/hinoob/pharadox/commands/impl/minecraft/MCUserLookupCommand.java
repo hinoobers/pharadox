@@ -3,6 +3,7 @@ package org.hinoob.pharadox.commands.impl.minecraft;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.hinoob.pharadox.commands.MessageCommand;
 import org.hinoob.pharadox.datastore.Datastore;
+import org.hinoob.pharadox.util.MojangAPI;
 
 public class MCUserLookupCommand extends MessageCommand {
 
@@ -30,5 +31,7 @@ public class MCUserLookupCommand extends MessageCommand {
 
         String username = args[0];
         // Do something with the username
+        MojangAPI.MojangAPIUser user = MojangAPI.fetch(username);
+
     }
 }

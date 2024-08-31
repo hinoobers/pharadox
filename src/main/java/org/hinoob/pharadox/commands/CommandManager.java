@@ -3,6 +3,7 @@ package org.hinoob.pharadox.commands;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.hinoob.pharadox.PharadoxBot;
+import org.hinoob.pharadox.commands.impl.minecraft.MCUserLookupCommand;
 import org.hinoob.pharadox.commands.impl.moderation.SetPrefixCommand;
 import org.hinoob.pharadox.commands.impl.moderation.SwearFilterCommand;
 import org.hinoob.pharadox.datastore.Datastore;
@@ -17,6 +18,7 @@ public class CommandManager {
     public void registerAll() {
         commands.add(new SwearFilterCommand());
         commands.add(new SetPrefixCommand());
+        commands.add(new MCUserLookupCommand());
     }
 
     public void handle(MessageReceivedEvent event) {
