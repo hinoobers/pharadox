@@ -1,5 +1,6 @@
 package org.hinoob.pharadox;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import lombok.Getter;
 import lombok.Setter;
 import net.dv8tion.jda.api.JDA;
@@ -17,10 +18,10 @@ public class PharadoxBot {
     private JDA jda;
 
     public void start() {
-        String token = System.getenv("TOKEN");
-        if (token == null) {
-            logger.severe("No token provided. Exiting...");
-            System.exit(1);
+        String token = Dotenv.load().get("TOKEN");
+        if(token == null) {
+            logger.severe("No token provided in .env file!");
+            return;
         }
 
         logger.info("Starting bot...");
