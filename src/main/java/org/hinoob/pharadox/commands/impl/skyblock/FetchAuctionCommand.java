@@ -34,19 +34,16 @@ public class FetchAuctionCommand extends MessageCommand {
 
         String itemName = String.join(" ", args);
 
-        SBAPI.fetchAuctions(new SBAPI.AuctionCallback() {
-            @Override
-            public void onAuctionPage(int page, List<SBAPI.Auction> auctions) {
-                for(SBAPI.Auction auction : auctions) {
-                    if(auction.getItemName().toLowerCase().contains(itemName.toLowerCase())) {
-                        EmbedBuilder builder = new EmbedBuilder();
-                        builder.setTitle(auction.getItemName());
-                        builder.addField("Starting bid", auction.getStartingBid() + " coins", true);
-                        builder.addField("Highest bid", auction.getHighestBid() + " coins", true);
+        SBAPI.fetchAuctions((page, auctions) -> {
+            for(SBAPI.Auction auction : auctions) {
+                if(auction.getItemName().toLowerCase().contains(itemName.toLowerCase())) {
+                    EmbedBuilder builder = new EmbedBuilder();
+                    builder.setTitle(auction.getItemName());
+                    builder.addField("Starting bid", auction.getStartingBid() + " coins", true);
+                    builder.addField("Highest bid", auction.getHighestBid() + " coins", true);
 
-                        event.getChannel().sendMessageEmbeds(builder.build()).queue();
-                        break;
-                    }
+                    event.getChannel().sendMessageEmbeds(builder.build()).queue();
+                    break;
                 }
             }
         });

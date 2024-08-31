@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import org.hinoob.pharadox.commands.CommandManager;
 import org.hinoob.pharadox.datastore.Datastore;
 import org.hinoob.pharadox.datastore.DatastoreManager;
+import org.hinoob.pharadox.datastore.GlobalDatastore;
 import org.hinoob.pharadox.listener.CommandListener;
 import org.hinoob.pharadox.listener.MessageListener;
 import org.hinoob.pharadox.util.CustomStatuses;
@@ -67,6 +68,7 @@ public class PharadoxBot {
                             }
                         }
                         datastoreManager.save();
+                        GlobalDatastore.save();
 
                         ++loopTicks;
                         if(loopTicks > 0 && loopTicks % Settings.STATUS_FLIP_INTERVAL == 0) {
