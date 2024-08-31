@@ -26,6 +26,11 @@ public class FetchAuctionCommand extends MessageCommand {
     }
 
     @Override
+    public String getInfo() {
+        return "Fetches an auction from the Hypixel Skyblock API";
+    }
+
+    @Override
     public void handle(String[] args, Datastore datastore, MessageReceivedEvent event) {
         if(args.length == 0) {
             event.getChannel().sendMessageEmbeds(error("Please provide a valid item name!")).queue();

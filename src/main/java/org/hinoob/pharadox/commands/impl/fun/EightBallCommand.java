@@ -3,6 +3,7 @@ package org.hinoob.pharadox.commands.impl.fun;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import org.hinoob.pharadox.commands.SlashCommand;
@@ -22,8 +23,8 @@ public class EightBallCommand extends SlashCommand {
     }
 
     @Override
-    public void register(CommandListUpdateAction update) {
-        update.addCommands(Commands.slash("8ball", "Ask the magic 8ball a question").addOption(OptionType.STRING, "question", "The question to ask", true)).queue();
+    public CommandData getCommandData() {
+        return Commands.slash("8ball", "Ask the magic 8ball a question").addOption(OptionType.STRING, "question", "The question to ask", true);
     }
 
     @Override

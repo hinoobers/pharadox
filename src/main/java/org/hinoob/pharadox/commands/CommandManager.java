@@ -2,6 +2,7 @@ package org.hinoob.pharadox.commands;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import org.hinoob.pharadox.PharadoxBot;
 import org.hinoob.pharadox.datastore.Datastore;
@@ -29,16 +30,19 @@ public class CommandManager {
         }
 
         CommandListUpdateAction update = PharadoxBot.getInstance().getJda().updateCommands();
-        for(Command command : commands) {
-            if(command instanceof SlashCommand slashcmd) {
-                slashcmd.register(update);
-            }
-        }
+        List<CommandData> datas = commands.stream().filter(p -> p instanceof SlashCommand).map(p -> ((SlashCommand) p).getCommandData()).toList();
+
+        update.addCommands(datas).queue();
         update.queue();
     }
 
     public Collection<Command> getCommands() {
-        return Collections.unmodifiableCollection(commands);
+        return Collections.unmodifiableCollection(commands).stream().sorted((a, b) -> {
+            String aName = a.getName();
+            String bName = b.getName();
+
+            return aName.compareTo(bName);
+        }).toList();
     }
 
     public void handle(MessageReceivedEvent event) {

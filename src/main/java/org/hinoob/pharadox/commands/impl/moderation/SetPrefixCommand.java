@@ -19,6 +19,11 @@ public class SetPrefixCommand extends MessageCommand {
     }
 
     @Override
+    public String getInfo() {
+        return "Set the bot's prefix";
+    }
+
+    @Override
     public String getPrefix(Datastore datastore) {
         return "!";
     }

@@ -27,6 +27,11 @@ public class BanCommand extends MessageCommand {
     }
 
     @Override
+    public String getInfo() {
+        return "Ban a user";
+    }
+
+    @Override
     public String getPrefix(Datastore datastore) {
         return "!";
     }

@@ -3,6 +3,7 @@ package org.hinoob.pharadox.commands.impl.fun;
 import com.google.gson.JsonObject;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import org.hinoob.pharadox.commands.SlashCommand;
@@ -13,9 +14,10 @@ import java.net.URL;
 
 public class MemeCommand extends SlashCommand {
 
+
     @Override
-    public void register(CommandListUpdateAction update) {
-        update.addCommands(Commands.slash("meme", "Get a random meme")).queue();
+    public CommandData getCommandData() {
+        return Commands.slash("meme", "Get a random meme");
     }
 
     @Override

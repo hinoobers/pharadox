@@ -28,6 +28,11 @@ public class SetMoneyCommand extends MessageCommand {
     }
 
     @Override
+    public String getInfo() {
+        return "Set a user's balance";
+    }
+
+    @Override
     public void handle(String[] args, Datastore datastore, MessageReceivedEvent event) {
         // check if they have perms (for now, check if they are an owner)
         if(!event.getGuild().getOwnerId().equals(event.getAuthor().getId())) {

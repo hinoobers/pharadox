@@ -22,6 +22,11 @@ public class SlotsCommand extends MessageCommand {
     }
 
     @Override
+    public String getInfo() {
+        return "Play the slots!";
+    }
+
+    @Override
     public String getPrefix(Datastore datastore) {
         JsonElement prefix = datastore.getData().get("prefix");
         if(prefix == null)

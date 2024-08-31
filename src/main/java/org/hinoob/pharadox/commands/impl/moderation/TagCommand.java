@@ -19,6 +19,11 @@ public class TagCommand extends MessageCommand {
     }
 
     @Override
+    public String getInfo() {
+        return "Display a tag";
+    }
+
+    @Override
     public String getPrefix(Datastore datastore) {
         JsonElement prefix = datastore.getData().get("prefix");
         if(prefix == null)

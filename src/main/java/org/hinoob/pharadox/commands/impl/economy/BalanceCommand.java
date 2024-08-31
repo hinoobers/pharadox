@@ -28,6 +28,11 @@ public class BalanceCommand extends MessageCommand {
     }
 
     @Override
+    public String getInfo() {
+        return "Check your balance";
+    }
+
+    @Override
     public void handle(String[] args, Datastore datastore, MessageReceivedEvent event) {
         JsonElement bal = GlobalDatastore.getUserData(event.getAuthor().getIdLong()).get("balance");
         if(bal == null) {

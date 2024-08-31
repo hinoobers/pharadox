@@ -21,6 +21,11 @@ public class SwearFilterCommand extends MessageCommand {
     }
 
     @Override
+    public String getInfo() {
+        return "Enable or disable the swear filter";
+    }
+
+    @Override
     public String getPrefix(Datastore datastore) {
         JsonElement prefix = datastore.getData().get("prefix");
         if(prefix == null)

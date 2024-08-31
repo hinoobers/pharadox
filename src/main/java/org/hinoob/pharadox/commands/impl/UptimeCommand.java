@@ -28,6 +28,11 @@ public class UptimeCommand extends MessageCommand {
     }
 
     @Override
+    public String getInfo() {
+        return "Get the bot's uptime";
+    }
+
+    @Override
     public void handle(String[] args, Datastore datastore, MessageReceivedEvent event) {
         long uptime = System.currentTimeMillis() - PharadoxBot.getInstance().getStartTime();
         long seconds = uptime / 1000;

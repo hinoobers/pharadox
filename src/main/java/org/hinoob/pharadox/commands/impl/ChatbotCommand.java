@@ -31,6 +31,11 @@ public class ChatbotCommand extends MessageCommand {
         return ":";
     }
 
+    @Override
+    public String getInfo() {
+        return "Chat with super smart AI";
+    }
+
     private final Map<List<String>, List<String>> responseMap = Map.of(
             List.of("what", "your", "name"), List.of(
                     "I'm a bot. You think these things have names?",

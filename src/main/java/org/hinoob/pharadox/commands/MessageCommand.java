@@ -17,6 +17,8 @@ public abstract class MessageCommand implements Command{
                 .build();
     }
 
+    public abstract String getInfo();
+
     public abstract String getPrefix(Datastore datastore);
 
     public abstract void handle(String[] args, Datastore datastore, MessageReceivedEvent event);

@@ -20,6 +20,11 @@ public class RollDiceCommand extends MessageCommand {
     }
 
     @Override
+    public String getInfo() {
+        return "Roll a dice";
+    }
+
+    @Override
     public String getPrefix(Datastore datastore) {
         JsonElement prefix = datastore.getData().get("prefix");
         if(prefix == null)

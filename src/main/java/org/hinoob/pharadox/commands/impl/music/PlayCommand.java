@@ -30,6 +30,11 @@ public class PlayCommand extends MessageCommand {
     }
 
     @Override
+    public String getInfo() {
+        return "Plays a song (WIP)";
+    }
+
+    @Override
     public void handle(String[] args, Datastore datastore, MessageReceivedEvent event) {
         GuildVoiceState voiceState = event.getMember().getVoiceState();
 

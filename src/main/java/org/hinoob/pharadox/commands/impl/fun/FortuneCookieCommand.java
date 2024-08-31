@@ -20,6 +20,11 @@ public class FortuneCookieCommand extends MessageCommand {
     }
 
     @Override
+    public String getInfo() {
+        return "Get a fortune cookie";
+    }
+
+    @Override
     public String getPrefix(Datastore datastore) {
         JsonElement prefix = datastore.getData().get("prefix");
         if(prefix == null)

@@ -27,6 +27,11 @@ public class MCUserLookupCommand extends MessageCommand {
     }
 
     @Override
+    public String getInfo() {
+        return "Look up a Minecraft user";
+    }
+
+    @Override
     public void handle(String[] args, Datastore datastore, MessageReceivedEvent event) {
         if(args.length == 0) {
             event.getChannel().sendMessageEmbeds(error("Usage: !mcuserlookup <username>")).queue();

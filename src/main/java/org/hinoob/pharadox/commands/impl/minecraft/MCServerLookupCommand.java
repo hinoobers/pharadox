@@ -62,6 +62,11 @@ public class MCServerLookupCommand extends MessageCommand {
     }
 
     @Override
+    public String getInfo() {
+        return "Look up a Minecraft server";
+    }
+
+    @Override
     public String getPrefix(Datastore datastore) {
         return "!";
     }

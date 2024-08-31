@@ -27,6 +27,11 @@ public class CoinFlipCommand extends MessageCommand {
     }
 
     @Override
+    public String getInfo() {
+        return "Flip a coin";
+    }
+
+    @Override
     public void handle(String[] args, Datastore datastore, MessageReceivedEvent event) {
         if(args.length != 1) {
             event.getChannel().sendMessageEmbeds(error("Invalid arguments. Usage: " + getPrefix(datastore) + "coinflip <heads/tails>")).queue();

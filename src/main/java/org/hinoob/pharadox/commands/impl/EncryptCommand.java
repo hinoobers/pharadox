@@ -2,6 +2,7 @@ package org.hinoob.pharadox.commands.impl;
 
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
@@ -12,16 +13,16 @@ import java.util.Base64;
 
 public class EncryptCommand extends SlashCommand {
 
+
     @Override
-    public void register(CommandListUpdateAction update) {
-        System.out.println("Registering encrypt command");
+    public CommandData getCommandData() {
         OptionData algos = new OptionData(OptionType.STRING, "algorithm", "The algorithm to use", true)
                 .addChoice("Base64", "base64")
                 .addChoice("Reverse", "reverse");
 
-        update.addCommands(Commands.slash("encrypt", "Encrypt a message")
+        return Commands.slash("encrypt", "Encrypt a message")
                 .addOption(OptionType.STRING, "message", "The message to encrypt", true)
-                .addOptions(algos)).queue();
+                .addOptions(algos);
     }
 
     @Override
