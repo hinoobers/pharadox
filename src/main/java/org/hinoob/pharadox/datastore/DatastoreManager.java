@@ -19,6 +19,10 @@ public class DatastoreManager {
     public Datastore get(long id) {
         return this.datastores.get(id);
     }
+
+    public void add(Datastore datastore) {
+        this.datastores.put(datastore.getID(), datastore);
+    }
     public void load() {
         File f = new File("datastore.json");
         if(!f.exists()) {

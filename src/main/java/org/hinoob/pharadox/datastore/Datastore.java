@@ -8,7 +8,7 @@ public class Datastore {
 
     private final long guildID;
     @Getter
-    private JsonObject data;
+    private JsonObject data = new JsonObject();
 
     public Datastore(long guildID) {
         this.guildID = guildID;
