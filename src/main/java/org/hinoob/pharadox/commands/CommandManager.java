@@ -7,6 +7,7 @@ import org.hinoob.pharadox.PharadoxBot;
 import org.hinoob.pharadox.commands.impl.CoinFlipCommand;
 import org.hinoob.pharadox.commands.impl.PingCommand;
 import org.hinoob.pharadox.commands.impl.UptimeCommand;
+import org.hinoob.pharadox.commands.impl.music.PlayCommand;
 import org.hinoob.pharadox.commands.impl.slash.EightBallCommand;
 import org.hinoob.pharadox.commands.impl.slash.MemeCommand;
 import org.hinoob.pharadox.commands.impl.minecraft.MCServerLookupCommand;
@@ -32,6 +33,7 @@ public class CommandManager {
         commands.add(new CoinFlipCommand());
         commands.add(new PingCommand());
         commands.add(new UptimeCommand());
+        commands.add(new PlayCommand());
 
         CommandListUpdateAction update = PharadoxBot.getInstance().getJda().updateCommands();
         for(Command command : commands) {
