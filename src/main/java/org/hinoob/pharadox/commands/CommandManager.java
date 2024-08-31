@@ -8,6 +8,8 @@ import org.hinoob.pharadox.datastore.Datastore;
 import org.reflections.Reflections;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class CommandManager {
@@ -33,6 +35,10 @@ public class CommandManager {
             }
         }
         update.queue();
+    }
+
+    public Collection<Command> getCommands() {
+        return Collections.unmodifiableCollection(commands);
     }
 
     public void handle(MessageReceivedEvent event) {
