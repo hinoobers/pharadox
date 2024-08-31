@@ -1,5 +1,6 @@
 package org.hinoob.pharadox.listener;
 
+import net.dv8tion.jda.api.entities.IMentionable;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -37,9 +38,14 @@ public class MessageListener extends ListenerAdapter {
                             }
                         });
                     });
-                    break;
+                    return;
                 }
             }
+        }
+
+        if(event.getAuthor().isBot()) return;
+        if(event.getMessage().getMentions().isMentioned(PharadoxBot.getInstance().getJda().getSelfUser())) {
+            event.getChannel().sendMessage("My prefix is `" + datastore.getData().get("prefix").getAsString() + "`").queue();
         }
     }
 }

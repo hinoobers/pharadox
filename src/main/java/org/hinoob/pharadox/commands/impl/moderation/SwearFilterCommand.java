@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.hinoob.pharadox.commands.MessageCommand;
 import org.hinoob.pharadox.datastore.Datastore;
+import org.hinoob.pharadox.util.Settings;
 
 import java.util.Arrays;
 
@@ -23,7 +24,7 @@ public class SwearFilterCommand extends MessageCommand {
     public String getPrefix(Datastore datastore) {
         JsonElement prefix = datastore.getData().get("prefix");
         if(prefix == null)
-            return "!";
+            return Settings.DEFAULT_PREFIX;
         return prefix.getAsString();
     }
 

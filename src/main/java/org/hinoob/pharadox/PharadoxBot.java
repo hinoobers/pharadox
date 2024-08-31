@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.hinoob.pharadox.commands.CommandManager;
@@ -12,6 +13,8 @@ import org.hinoob.pharadox.datastore.Datastore;
 import org.hinoob.pharadox.datastore.DatastoreManager;
 import org.hinoob.pharadox.listener.CommandListener;
 import org.hinoob.pharadox.listener.MessageListener;
+import org.hinoob.pharadox.util.CustomStatuses;
+import org.hinoob.pharadox.util.Settings;
 
 import java.util.logging.Logger;
 
@@ -25,6 +28,9 @@ public class PharadoxBot {
     private JDA jda;
     private final DatastoreManager datastoreManager = new DatastoreManager();
     private final CommandManager commandManager = new CommandManager();
+    private final long startTime = System.currentTimeMillis();
+
+    private int loopTicks = 0;
 
     public void start() {
         String token = Dotenv.load().get("TOKEN");
@@ -38,6 +44,7 @@ public class PharadoxBot {
                 .addEventListeners(new MessageListener(), new CommandListener())
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MEMBERS)
                 .build();
+        CustomStatuses.flip();
         this.datastoreManager.load();
         this.commandManager.registerAll();
 
@@ -59,6 +66,11 @@ public class PharadoxBot {
                             }
                         }
                         datastoreManager.save();
+
+                        ++loopTicks;
+                        if(loopTicks > 0 && loopTicks % Settings.STATUS_FLIP_INTERVAL == 0) {
+                            CustomStatuses.flip();
+                        }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
