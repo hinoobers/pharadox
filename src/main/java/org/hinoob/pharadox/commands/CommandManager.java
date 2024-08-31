@@ -7,6 +7,7 @@ import org.hinoob.pharadox.PharadoxBot;
 import org.hinoob.pharadox.commands.impl.CoinFlipCommand;
 import org.hinoob.pharadox.commands.impl.PingCommand;
 import org.hinoob.pharadox.commands.impl.UptimeCommand;
+import org.hinoob.pharadox.commands.impl.moderation.BanCommand;
 import org.hinoob.pharadox.commands.impl.music.PlayCommand;
 import org.hinoob.pharadox.commands.impl.slash.EightBallCommand;
 import org.hinoob.pharadox.commands.impl.slash.MemeCommand;
@@ -34,6 +35,7 @@ public class CommandManager {
         commands.add(new PingCommand());
         commands.add(new UptimeCommand());
         commands.add(new PlayCommand());
+        commands.add(new BanCommand());
 
         CommandListUpdateAction update = PharadoxBot.getInstance().getJda().updateCommands();
         for(Command command : commands) {
