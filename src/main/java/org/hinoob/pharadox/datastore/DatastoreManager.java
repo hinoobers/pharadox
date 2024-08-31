@@ -16,6 +16,9 @@ public class DatastoreManager {
 
     private final Map<Long, Datastore> datastores = new HashMap<>();
 
+    public Datastore get(long id) {
+        return this.datastores.get(id);
+    }
     public void load() {
         File f = new File("datastore.json");
         if(!f.exists()) {
