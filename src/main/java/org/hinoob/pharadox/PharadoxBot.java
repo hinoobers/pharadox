@@ -11,6 +11,7 @@ import org.hinoob.pharadox.commands.CommandManager;
 import org.hinoob.pharadox.datastore.Datastore;
 import org.hinoob.pharadox.datastore.DatastoreManager;
 import org.hinoob.pharadox.listener.CommandListener;
+import org.hinoob.pharadox.listener.MessageListener;
 
 import java.util.logging.Logger;
 
@@ -34,7 +35,7 @@ public class PharadoxBot {
 
         logger.info("Starting bot...");
         this.jda = JDABuilder.createDefault(token)
-                .addEventListeners(new CommandListener())
+                .addEventListeners(new MessageListener(), new CommandListener())
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_PRESENCES, GatewayIntent.GUILD_MEMBERS)
                 .build();
         this.datastoreManager.load();
