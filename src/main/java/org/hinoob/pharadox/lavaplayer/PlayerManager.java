@@ -49,7 +49,7 @@ public class PlayerManager {
 
             @Override
             public void noMatches() {
-
+                System.out.println("No matches found!");
             }
 
             @Override
