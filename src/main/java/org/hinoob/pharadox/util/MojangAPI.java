@@ -14,6 +14,7 @@ public class MojangAPI {
         try {
             URL url = new URL("https://sessionserver.mojang.com/session/minecraft/profile/" + uuid.toString());
             URLConnection connection = url.openConnection();
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
             BufferedReader reader = new BufferedReader(new java.io.InputStreamReader(connection.getInputStream()));
             StringBuilder builder = new StringBuilder();
             String line;
@@ -37,6 +38,7 @@ public class MojangAPI {
         try {
             URL url = new URL("https://api.mojang.com/users/profiles/minecraft/" + username);
             URLConnection connection = url.openConnection();
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
             BufferedReader reader = new BufferedReader(new java.io.InputStreamReader(connection.getInputStream()));
             StringBuilder builder = new StringBuilder();
             String line;
@@ -68,5 +70,23 @@ public class MojangAPI {
             this.data = data;
             System.out.println(data);
         }
+
+        public String getName() {
+            return data.get("name").getAsString();
+        }
+
+        public UUID getUUID() {
+            return fixUUID(data.get("id").getAsString());
+        }
+
+        public String getTexture() {
+            return data.get("properties").getAsJsonArray().get(0).getAsJsonObject().get("value").getAsString();
+        }
+
+        public String getFaceURL() {
+            return "https://crafatar.com/avatars/" + getUUID().toString();
+        }
+
+
     }
 }
