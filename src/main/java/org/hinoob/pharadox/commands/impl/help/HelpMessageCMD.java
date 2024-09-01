@@ -11,10 +11,8 @@ import org.hinoob.pharadox.datastore.Datastore;
 import org.hinoob.pharadox.util.Settings;
 
 import java.awt.*;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Consumer;
 
 public class HelpMessageCMD extends MessageCommand {
@@ -44,32 +42,58 @@ public class HelpMessageCMD extends MessageCommand {
 
     @Override
     public void handle(String[] args, Datastore datastore, MessageReceivedEvent event) {
-        EmbedBuilder builder = new EmbedBuilder();
-        builder.setTitle("Commands");
-        builder.setDescription("Here's a list of all commands:");
-        builder.setColor(Color.GREEN);
+        final EmbedBuilder[] builder = {new EmbedBuilder()};
+        builder[0].setTitle("Commands");
+        builder[0].setDescription("Here's a list of all commands:");
+        builder[0].setColor(Color.GREEN);
 
         Map<String, String> infoMap = new HashMap<>();
 
-        event.getJDA().retrieveCommands().queue(new Consumer<List<Command>>() {
-            @Override
-            public void accept(List<Command> commands) {
-                for(Command command : commands) {
-                    infoMap.put(command.getName(), command.getDescription());
+        event.getJDA().retrieveCommands().queue(commands -> {
+            for (Command command : commands) {
+                infoMap.put(command.getName(), command.getDescription());
+            }
+
+            Collection<org.hinoob.pharadox.commands.Command> commandList = PharadoxBot.getInstance().getCommandManager().getCommands();
+            List<EmbedBuilder> embedBuilders = new ArrayList<>();
+
+            int fieldCount = 0;
+
+            for (org.hinoob.pharadox.commands.Command command : commandList) {
+                String commandName;
+                String commandInfo;
+
+                if (command instanceof SlashCommand) {
+                    commandName = "/" + command.getName();
+                    commandInfo = infoMap.get(command.getName());
+                } else if (command instanceof MessageCommand msgcmd) {
+                    commandName = msgcmd.getPrefix(PharadoxBot.getInstance().getDatastoreManager().get(event.getGuild().getIdLong())) + command.getName();
+                    commandInfo = msgcmd.getInfo() + " - " + (command.getAliases().length > 0 ? "Aliases: " + Arrays.toString(command.getAliases()) : "");
+                } else {
+                    continue;  // Skip if it's neither SlashCommand nor MessageCommand
                 }
 
-                for(org.hinoob.pharadox.commands.Command command : PharadoxBot.getInstance().getCommandManager().getCommands()) {
-                    if(command instanceof SlashCommand) {
-                        builder.addField("/" + command.getName(), infoMap.get(command.getName()), false);
-                    } else if(command instanceof MessageCommand msgcmd){
-                        builder.addField(msgcmd.getPrefix(PharadoxBot.getInstance().getDatastoreManager().get(event.getGuild().getIdLong())) + command.getName(), msgcmd.getInfo() + " - " + (command.getAliases().length > 0 ? "Aliases: " + Arrays.toString(command.getAliases()) : ""), false);
-                    }
+                if (fieldCount >= 25) {
+                    embedBuilders.add(builder[0]);  // Save the current embed
+                    builder[0] = new EmbedBuilder();  // Start a new embed
+                    builder[0].setColor(Color.GREEN);
+                    fieldCount = 0;
                 }
 
-                event.getChannel().sendMessageEmbeds(builder.build()).queue();
+                builder[0].addField(commandName, commandInfo, false);
+                fieldCount++;
+            }
+
+            // Add the last builder if it contains any fields
+            if (fieldCount > 0) {
+                embedBuilders.add(builder[0]);
+            }
+
+            // Send all embeds
+            for (EmbedBuilder embed : embedBuilders) {
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
             }
         });
-
 
     }
 }

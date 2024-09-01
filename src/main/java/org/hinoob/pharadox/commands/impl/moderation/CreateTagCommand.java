@@ -1,6 +1,7 @@
 package org.hinoob.pharadox.commands.impl.moderation;
 
 import com.google.gson.JsonObject;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
@@ -30,6 +31,10 @@ public class CreateTagCommand extends SlashCommand {
 
     @Override
     public void handle(SlashCommandInteractionEvent event, Datastore datastore) {
+        if(!event.getMember().hasPermission(Permission.MANAGE_SERVER)) {
+            event.getChannel().sendMessageEmbeds(error("You do not have permission to use this command!")).queue();
+            return;
+        }
         String name = event.getOption("name").getAsString();
         String content = event.getOption("content").getAsString();
 
