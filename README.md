@@ -15,6 +15,13 @@ Here are some of the commands the bot offers:
 
 And many more!
 
+## Setup
+
+1. Download this project to your PC.
+2. Create a **.env** file on the same directory
+3. Declare **TOKEN** (That being your discord bot token), and **WEEATHER_API** (API key for https://tomorrow.io, that bot uses to grab weather data, **optional**, but /weather might throw some **errors** if left unset)
+4. Build it (Or run from your IDE)
+   
 ## Permissions
 
 Most commands dont require permissions,
