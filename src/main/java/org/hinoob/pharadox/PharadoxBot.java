@@ -48,6 +48,7 @@ public class PharadoxBot {
                 .build();
         CustomStatuses.flip();
         this.datastoreManager.load();
+        GlobalDatastore.load();
         this.commandManager.registerAll();
 
         try {
