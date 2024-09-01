@@ -44,12 +44,14 @@ public class GuessNumberCommand extends SlashCommand {
             return;
         }
 
+        JsonObject userData = GlobalDatastore.getUserData(event.getUser().getIdLong());
+        if(!userData.has("balance") || userData.get("balance").getAsInt() < bet) {
+            event.reply("You don't have enough coins to bet that amount").queue();
+            return;
+        }
+
         int randomNumber = (int) (Math.random() * 10) + 1;
 
-        JsonObject userData = GlobalDatastore.getUserData(event.getUser().getIdLong());
-        if(!userData.has("balance")) {
-            userData.addProperty("balance", 0);
-        }
         if(randomNumber == number) {
             userData.addProperty("balance", userData.get("balance").getAsInt() + bet);
             event.reply("You guessed the number! You won " + bet + " coins").queue();
